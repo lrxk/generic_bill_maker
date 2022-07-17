@@ -94,12 +94,12 @@ class Bill_Maker_GUI:
         ut_price= float(self.unit_price_entry.get())
         vat_rate= float(self.vat_entry.get())
         vat= ut_price * vat_rate
-        return round(vat,2)
+        return round(vat,3)
     def compute_total_price_item(self):
         # compute the total price
         unit_price_with_vat= float(self.unit_price_entry.get())+self.compute_vat()
         total_price_item= unit_price_with_vat * float(self.quantity_entry.get())
-        return round(total_price_item,2)
+        return round(total_price_item,3)
     def add_item(self):
         # add the item to the bill
         data=[]
@@ -107,7 +107,7 @@ class Bill_Maker_GUI:
         data.append(self.quantity_entry.get())
         data.append(self.unit_price_entry.get())
         data.append(self.vat_entry.get())
-        unit_price_with_vat= round(float(self.unit_price_entry.get())+self.compute_vat(),2)
+        unit_price_with_vat= round(float(self.unit_price_entry.get())+self.compute_vat(),3)
         data.append(unit_price_with_vat)
         total_price_item= self.compute_total_price_item()
         data.append(total_price_item)
