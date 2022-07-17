@@ -5,7 +5,7 @@ class Generic_Bill_Maker(FPDF):
         super().__init__(format='A4', orientation='P')
         self.add_page()
         self.set_font('Arial', 'B', 16)
-        self.set_auto_page_break(False)
+        self.set_auto_page_break(True, 20)
         self.set_margins(0, 0, 0)
         
         pass
