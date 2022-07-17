@@ -32,11 +32,12 @@ class Generic_Bill_Maker(FPDF):
                 self.multi_cell(col_width, line_height, datum, border=1,
                         new_x="RIGHT", new_y="TOP", max_line_height=self.font_size)
             self.ln(line_height)
+        self.ln(20)
         pass
 
     def add_text(self, text: str) -> None:
         """ Add text to the PDF """
-        self.cell(0, 0.5, text, 0, 1, 'C')
+        self.cell(0, 0.5, text, 0, 1, align='L')
         self.ln(20)
         pass
 
@@ -49,14 +50,22 @@ class Generic_Bill_Maker(FPDF):
 if "__main__" == __name__:
     """ Run the program """
     bill_maker = Generic_Bill_Maker()
-    bill_maker.add_text("Text")
+    bill_maker.add_text("Thanks for your purchase!")
+    link="https://www.google.com"
+    bill_maker.set_link(link)
+    bill_maker.write(5, "Click here !", link)
+    bill_maker.ln(20)
     data = [
-        ["First name", "Last name", "Age", "City"],
-        ["Jules", "Smith", "34", "San Juan"],
-        ["Mary", "Ramos", "45", "Orlando"],
-        ["Carlson", "Banks", "19", "Los Angeles"],
-        ["Lucas", "Cimon", "31", "Saint-Mahturin-sur-Loire"],
+        ["Item name", "Quantity purchased", "Unit price without VAT", "VAT amount","Unit price with VAT", "Total price"],
+        ["Soap", "4", "1", "0.20", "1.20", "4.20"],
+        ["Toothbrush", "2", "0.20", "0.40", "0.60", "1.00"],
+        ["Toothpasta", "1", "0.20", "0.40", "0.60", "0.80"],
+        ["Cotton swab", "1", "0.20", "0.40", "0.60", "0.80"],
     ]
     bill_maker.add_table(data)
+    bill_maker.add_text("For any demands")
+    bill_maker.write(5,"click here",link)
+    bill_maker.ln(20)
+    bill_maker.add_text("Or contact us at 255-555-5555")
     bill_maker.save_pdf("test.pdf")
     pass
