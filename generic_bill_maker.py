@@ -27,7 +27,7 @@ class Generic_Bill_Maker(FPDF):
         """ Add a table to the PDF """
         line_height = self.font_size * 2.5
         col_width = self.epw / len(table_data[0])  # distribute content evenly
-        for row in data:
+        for row in table_data:
             for datum in row:
                 self.multi_cell(col_width, line_height, datum, border=1,
                         new_x="RIGHT", new_y="TOP", max_line_height=self.font_size)
@@ -47,25 +47,4 @@ class Generic_Bill_Maker(FPDF):
         pass
 
 
-if "__main__" == __name__:
-    """ Run the program """
-    bill_maker = Generic_Bill_Maker()
-    bill_maker.add_text("Thanks for your purchase!")
-    link="https://www.google.com"
-    bill_maker.set_link(link)
-    bill_maker.write(5, "Click here !", link)
-    bill_maker.ln(20)
-    data = [
-        ["Item name", "Quantity purchased", "Unit price without VAT", "VAT amount","Unit price with VAT", "Total price"],
-        ["Soap", "4", "1", "0.20", "1.20", "4.20"],
-        ["Toothbrush", "2", "0.20", "0.40", "0.60", "1.00"],
-        ["Toothpasta", "1", "0.20", "0.40", "0.60", "0.80"],
-        ["Cotton swab", "1", "0.20", "0.40", "0.60", "0.80"],
-    ]
-    bill_maker.add_table(data)
-    bill_maker.add_text("For any demands")
-    bill_maker.write(5,"click here",link)
-    bill_maker.ln(20)
-    bill_maker.add_text("Or contact us at 255-555-5555")
-    bill_maker.save_pdf("test.pdf")
-    pass
+
