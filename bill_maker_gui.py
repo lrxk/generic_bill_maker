@@ -1,5 +1,7 @@
 import tkinter as tk
 
+from generic_bill_maker import Generic_Bill_Maker
+
 
 class Bill_Maker_GUI:
     def __init__(self):
@@ -88,6 +90,18 @@ class Bill_Maker_GUI:
         self.total_price_label.configure(text="Total price:")
     def save_bill(self):
         # save the bill to a file
+        # transform all the cart items to strings
+        cart_items = [["Item name", "Quantity", "Unit price", "VAT", "Total price"]]
+        for i in range(len(self.cart)):
+            individual_item=[]
+            for j in range(len(self.cart[i])):
+                individual_item.append(str(self.cart[i][j]))
+            cart_items.append(individual_item)
+        bill=Generic_Bill_Maker()
+        bill.add_text("Thanks for your purchase!")
+
+        bill.add_table(cart_items)
+        bill.save_pdf("bill.pdf")
         pass
     def compute_vat(self):
         # compute the VAT
